@@ -29,24 +29,23 @@ public class MyApplication extends Application {
         super.onCreate();
 //        registerActivityLifecycleCallbacks(this);
         singleton = this;
-        clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getApplicationContext());
+//        clevertapDefaultInstance = CleverTapAPI.getDefaultInstance(getApplicationContext());
         CleverTapAPI.setDebugLevel(CleverTapAPI.LogLevel.VERBOSE);
-
         TemplateRenderer.setDebugLevel(3);
         CleverTapAPI.setNotificationHandler(new PushTemplateNotificationHandler());
 
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Log.w("TAG", "Fetching FCM registration token failed", task.getException());
-                        return;
-                    }
-
-                    // Get new FCM registration token
-                    String token = task.getResult();
-                    Log.v("TAG", "token: " + token);
-                    clevertapDefaultInstance.pushFcmRegistrationId(token, true);
-                });
+//        FirebaseMessaging.getInstance().getToken()
+//                .addOnCompleteListener(task -> {
+//                    if (!task.isSuccessful()) {
+//                        Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+//                        return;
+//                    }
+//
+//                    // Get new FCM registration token
+//                    String token = task.getResult();
+//                    Log.v("TAG", "token: " + token);
+////                    clevertapDefaultInstance.pushFcmRegistrationId(token, true);
+//                });
 
         CleverTapAPI.createNotificationChannel(getApplicationContext(),
                 "customclevertapid", "Custom Clevertap ID",
